@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="test">
+
+<head>
+
+	<meta charset="UTF-8">
+	<title>auto-adjust Test</title>
+
+	<script src="../bower_components/angular/angular.js"></script>
+	<script src="../auto-adjust.js"></script>
+
+	<script>
+
+		angular.module('test', ['autoAdjust']);
+
+		angular.module('test').controller('Test', function ($scope) {
+
+			$scope.maxlength = 2;
+			$scope.max = 10;
+			$scope.min = -10;
+
+		});
+
+	</script>
+
+</head>
+
+<body ng-controller="Test">
+
+	
+	<h2>Test values</h2>
+	
+	<div>
+		<label for="maxlength">maxlength</label>
+		<input type="text" id="maxlength" ng-model="maxlength">
+	</div>
+	
+	<div>
+		<label for="min">min</label>
+		<input type="text" id="min" ng-model="min">
+	</div>
+
+	<div>
+		<label for="max">max</label>
+		<input type="text" id="max" ng-model="max">
+	</div>
+	
+	<h2>Test text input</h2>
+
+	<input type="text" ng-model="testText" auto-adjust maxlength="{{maxlength}}">
+	<pre>testText: {{testText}}</pre>
+
+
+	<h2>Test number input</h2>
+
+	<input type="number" ng-model="testNumber" auto-adjust min="{{min}}" max="{{max}}">
+	<pre>testNumber: {{testNumber}}</pre>
+
+
+	<h2>Test range input</h2>
+
+	<input type="range" ng-model="testRange" auto-adjust min="{{min}}" max="{{max}}">
+	<pre>testRange: {{testRange}}</pre>
+
+
+	<h2>Test date input</h2>
+
+	<input type="date" ng-model="testDate" auto-adjust min="{{min}}" max="{{max}}">
+	<pre>testDate: {{testDate}}</pre>
+
+
+</body>
+
+</html>

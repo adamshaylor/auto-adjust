@@ -1,0 +1,29 @@
+{
+  "name": "auto-adjust",
+  "version": "0.0.0",
+  "homepage": "https://github.com/adamshaylor/auto-adjust",
+  "authors": [
+    "Adam Shaylor <business@adamshaylor.com>"
+  ],
+  "description": "An angular directive that automatically adjusts input values based on dynamic values of its maxlength, max and min attributes",
+  "main": "auto-adjust.js",
+  "keywords": [
+    "angular",
+    "input",
+    "maxlength",
+    "max",
+    "min",
+    "directive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.0 < 2"
+  }
+}
