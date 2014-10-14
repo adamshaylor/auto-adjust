@@ -71,7 +71,9 @@
 				// triggering any events (which Chrome 37.0.2062.124 does for min but not for max) we must defensively
 				// assume that they always do so and trigger the event on the browsers' behalf
 
-				element.triggerHandler(changeEventName);
+				$timeout(function () {
+					element.triggerHandler(changeEventName);
+				});
 
 			}
 
@@ -100,7 +102,9 @@
 
 				// See note in handleMinChange()
 
-				element.triggerHandler(changeEventName);
+				$timeout(function () {
+					element.triggerHandler(changeEventName);
+				});
 
 			}
 
@@ -116,7 +120,9 @@
 
 				// See note in handleMinChange()
 
-				element.triggerHandler(changeEventName);
+				$timeout(function () {
+					element.triggerHandler(changeEventName);
+				});
 
 			}
 
