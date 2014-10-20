@@ -4,6 +4,18 @@
 	'use strict';
 
 
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+	if (!String.prototype.trim) {
+		(function(){  
+			// Make sure we trim BOM and NBSP
+			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+			String.prototype.trim = function () {
+				return this.replace(rtrim, '');
+			};
+		})();
+	}
+
+
 	angular.module('autoAdjust', [])
 		.constant('changeEventName', 'input')
 		.constant('numericTypeRegex', (/^(number|range)/))
@@ -112,7 +124,11 @@
 			function handleMaxlengthChange (maxlength) {
 
 				var value = element.val(),
-					parsedMaxlength = Number(maxlength);
+					parsedMaxlength = parseAsNumber(maxlength);
+
+				if (isNaN(parsedMaxlength)) {
+					return;
+				}
 
 				if (value.length > parsedMaxlength) {
 					element.val(value.slice(0, maxlength));
@@ -138,6 +154,19 @@
 				}
 
 				return null;
+
+			}
+
+
+			function parseAsNumber (attributeValueString) {
+
+				if (attributeValueString.trim() === '') {
+					return NaN;
+				}
+
+				else {
+					return Number(attributeValueString);
+				}
 
 			}
 

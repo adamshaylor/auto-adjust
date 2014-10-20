@@ -1,6 +1,6 @@
 {
   "name": "auto-adjust",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An angular directive that automatically adjusts input values based on dynamic values of its maxlength, max and min attributes",
   "main": "auto-adjust.js",
   "directories": {
