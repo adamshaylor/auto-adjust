@@ -6,13 +6,18 @@
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
 	if (!String.prototype.trim) {
-		(function(){  
+
+		(function () {
+
 			// Make sure we trim BOM and NBSP
 			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+			
 			String.prototype.trim = function () {
 				return this.replace(rtrim, '');
 			};
+
 		})();
+
 	}
 
 
@@ -28,11 +33,14 @@
 		var autoAdjust = {};
 
 
+		autoAdjust.restrict = 'A';
+
+
 		autoAdjust.link = function (scope, element, attributes) {
 
 
 			// `min` and `max` only apply to numeric, date, datetime and datetime-local input types
-			// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input
+			// https://developer.mozilla.org/en-US/docs/Web/HTML/element/Input
 
 			if (attributes.type.match(numericTypeRegex) || attributes.type.match(dateTypeRegex)) {
 				scope.$watch(makeAttributeGetter('min'), handleMinChange);
@@ -83,9 +91,7 @@
 				// triggering any events (which Chrome 37.0.2062.124 does for min but not for max) we must defensively
 				// assume that they always do so and trigger the event on the browsers' behalf
 
-				$timeout(function () {
-					element.triggerHandler(changeEventName);
-				});
+				triggerChange(changeEventName);
 
 			}
 
@@ -114,9 +120,7 @@
 
 				// See note in handleMinChange()
 
-				$timeout(function () {
-					element.triggerHandler(changeEventName);
-				});
+				triggerChange(changeEventName);
 
 			}
 
@@ -136,14 +140,16 @@
 
 				// See note in handleMinChange()
 
-				$timeout(function () {
-					element.triggerHandler(changeEventName);
-				});
+				triggerChange(changeEventName);
 
 			}
 
 
 			function parseAsInputType (attributeValueString) {
+
+				if (attributeValueString === '') {
+					return null;
+				}
 
 				if (attributes.type.match(numericTypeRegex)) {
 					return Number(attributeValueString);
@@ -153,7 +159,9 @@
 					return new Date(attributeValueString);
 				}
 
-				return null;
+				else {
+					return null;
+				}
 
 			}
 
@@ -183,7 +191,7 @@
 			function parsedValueIsExpectedType (parsedValue) {
 
 				if (attributes.type.match(numericTypeRegex)) {
-					return angular.isNumber(parsedValue);
+					return !isNaN(parsedValue) && angular.isNumber(parsedValue);
 				}
 
 				else if (attributes.type.match(dateTypeRegex)) {
@@ -202,6 +210,15 @@
 			function dateObjectToHtmlInputValue (dateObject) {
 
 				return dateObject.toISOString().substring(0, 10);
+
+			}
+
+
+			function triggerChange (changeEventName) {
+
+				$timeout(function () {
+					element.triggerHandler(changeEventName);
+				});
 
 			}
 

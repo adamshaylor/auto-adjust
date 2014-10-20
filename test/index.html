@@ -19,6 +19,9 @@
 			$scope.max = 10;
 			$scope.min = -10;
 
+			$scope.testNumber = 5;
+			$scope.testRange = -5;
+
 		});
 
 	</script>
@@ -47,25 +50,25 @@
 	
 	<h2>Test text input</h2>
 
-	<input type="text" ng-model="testText" auto-adjust maxlength="{{maxlength}}">
+	<input type="text" ng-model="testText" auto-adjust ng-attr-maxlength="{{maxlength}}">
 	<pre>testText: {{testText}}</pre>
 
 
 	<h2>Test number input</h2>
 
-	<input type="number" ng-model="testNumber" auto-adjust min="{{min}}" max="{{max}}">
+	<input type="number" ng-model="testNumber" auto-adjust ng-attr-min="{{min}}" ng-attr-max="{{max}}">
 	<pre>testNumber: {{testNumber}}</pre>
 
 
 	<h2>Test range input</h2>
-
-	<input type="range" ng-model="testRange" auto-adjust min="{{min}}" max="{{max}}">
+	
+	<input type="range" ng-model="testRange" auto-adjust ng-attr-min="{{min}}" ng-attr-max="{{max}}" min="-100" max="100">
 	<pre>testRange: {{testRange}}</pre>
 
 
 	<h2>Test date input</h2>
 
-	<input type="date" ng-model="testDate" auto-adjust min="{{min}}" max="{{max}}">
+	<input type="date" ng-model="testDate" auto-adjust ng-attr-min="{{min}}" ng-attr-max="{{max}}">
 	<pre>testDate: {{testDate}}</pre>
 
 
