@@ -23,7 +23,9 @@ angular.module('yourModule', ['autoAdjust']);
 
 ## Usage
 
-The `ngAttr` directive saves you from putting Angular expressions in attributes that don’t technically support them. In practice, I’ve found that you can get away without using it for most situations.
+The `ngAttr` directive saves you from putting Angular expressions in attributes that don’t technically support them.
+
+In practice, I’ve found that you can get away without using it for most situations, but Angular does not enforce dynamic values for `min`, `max` or `maxlength` out of the box. The `autoAdjust` directive will automatically enforce these restrictions:
 
 ```html
 <input type="text" ng-model="yourText" auto-adjust ng-attr-maxlength="{{yourTextMaxlength}}">
@@ -36,7 +38,7 @@ The `ngAttr` directive saves you from putting Angular expressions in attributes 
 <input type="date" ng-model="yourDate" auto-adjust ng-attr-min="{{yourDateMin}}" ng-attr-max="{{yourDateMax}}">
 ```
 
-The `autoAdjust` directive will automatically enforce these restrictions. So, for example, if `yourText` has 20 characters and `yourTextMaxlength` changes to 10, the text will be truncated to fit the new limit.
+In this example, if `yourText` has 20 characters and `yourTextMaxlength` changes to 10, the text will be truncated to fit the new limit.
 
 It does not rely on `ngModel`, nor does it create an isolate scope. Instead, it alters the value of the element and triggers a change event. If you are using `ngModel`, Angular will handle the change event and the model will update as if the user had input the new value manually.
 
